@@ -1,12 +1,13 @@
-const ALLOWED_DOMAINS = ["@student.isd.sn", "@faculty.isd.sn"] as const;
+// Basic email format: non-empty, single @, something before and after with at least one dot in domain
+const VALID_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
- * Validates that email ends with @student.isd.sn or @faculty.isd.sn.
+ * Validates that the email has a valid format. Verification is handled by the auth provider (e.g. Supabase email confirmation).
  */
-export function validateEmailDomain(email: string): { valid: true } | { valid: false; reason: "emailDomain" } {
+export function validateEmailFormat(email: string): { valid: true } | { valid: false; reason: "emailInvalid" } {
   const normalized = email.trim().toLowerCase();
-  const allowed = ALLOWED_DOMAINS.some((d) => normalized.endsWith(d));
-  return allowed ? { valid: true } : { valid: false, reason: "emailDomain" };
+  if (!normalized || !VALID_EMAIL.test(normalized)) return { valid: false, reason: "emailInvalid" };
+  return { valid: true };
 }
 
 /**
@@ -19,7 +20,7 @@ export function validatePassword(password: string): { valid: true } | { valid: f
   return { valid: true };
 }
 
-export type SignupValidationError = "emailDomain" | "passwordLength" | "passwordUppercase" | "passwordSpecial";
+export type SignupValidationError = "emailInvalid" | "passwordLength" | "passwordUppercase" | "passwordSpecial";
 
 export interface SignupValidationResult {
   valid: boolean;
@@ -29,9 +30,10 @@ export interface SignupValidationResult {
 
 /**
  * Runs both email and password validation. Returns first error per field.
+ * Open registration: any valid email format; verification is done by the auth provider.
  */
 export function validateSignup(email: string, password: string): SignupValidationResult {
-  const emailResult = validateEmailDomain(email);
+  const emailResult = validateEmailFormat(email);
   const passwordResult = validatePassword(password);
 
   return {

@@ -1,28 +1,27 @@
 import { describe, it, expect } from "vitest";
 import {
-  validateEmailDomain,
+  validateEmailFormat,
   validatePassword,
   validateSignup,
 } from "./signup-validation";
 
-describe("validateEmailDomain", () => {
-  it("rejects emails not ending in @student.isd.sn or @faculty.isd.sn", () => {
-    expect(validateEmailDomain("user@gmail.com").valid).toBe(false);
-    expect(validateEmailDomain("user@isd.sn").valid).toBe(false);
-    expect(validateEmailDomain("user@student.isd.com").valid).toBe(false);
-    expect(validateEmailDomain("user@faculty.isd.sn.org").valid).toBe(false);
-    expect(validateEmailDomain("").valid).toBe(false);
+describe("validateEmailFormat", () => {
+  it("rejects empty or invalid email format", () => {
+    expect(validateEmailFormat("").valid).toBe(false);
+    expect(validateEmailFormat("  ").valid).toBe(false);
+    expect(validateEmailFormat("no-at-sign").valid).toBe(false);
+    expect(validateEmailFormat("@nodomain").valid).toBe(false);
+    expect(validateEmailFormat("nobody@").valid).toBe(false);
+    expect(validateEmailFormat("a@b").valid).toBe(false); // no TLD
   });
 
-  it("accepts emails ending in @student.isd.sn", () => {
-    expect(validateEmailDomain("a@student.isd.sn").valid).toBe(true);
-    expect(validateEmailDomain("student@student.isd.sn").valid).toBe(true);
-    expect(validateEmailDomain("User@Student.ISD.SN").valid).toBe(true);
-  });
-
-  it("accepts emails ending in @faculty.isd.sn", () => {
-    expect(validateEmailDomain("teacher@faculty.isd.sn").valid).toBe(true);
-    expect(validateEmailDomain("Admin@Faculty.ISD.SN").valid).toBe(true);
+  it("accepts any valid email address format", () => {
+    expect(validateEmailFormat("user@gmail.com").valid).toBe(true);
+    expect(validateEmailFormat("user@yahoo.co.uk").valid).toBe(true);
+    expect(validateEmailFormat("a@student.isd.sn").valid).toBe(true);
+    expect(validateEmailFormat("teacher@faculty.isd.sn").valid).toBe(true);
+    expect(validateEmailFormat("name+tag@example.org").valid).toBe(true);
+    expect(validateEmailFormat("User@Example.COM").valid).toBe(true);
   });
 });
 
@@ -52,27 +51,29 @@ describe("validatePassword", () => {
 });
 
 describe("validateSignup", () => {
-  it("returns invalid when email domain is wrong", () => {
-    const result = validateSignup("user@gmail.com", "ValidP@ss1");
+  it("returns invalid when email format is wrong", () => {
+    const result = validateSignup("invalid", "ValidP@ss1");
     expect(result.valid).toBe(false);
-    expect(result.emailError).toBe("emailDomain");
+    expect(result.emailError).toBe("emailInvalid");
   });
 
   it("returns invalid when password is weak", () => {
-    const result = validateSignup("user@student.isd.sn", "weak");
+    const result = validateSignup("user@gmail.com", "weak");
     expect(result.valid).toBe(false);
     expect(result.passwordError).toBeDefined();
   });
 
   it("returns invalid for both invalid email and weak password", () => {
-    const result = validateSignup("x@y.com", "a");
+    const result = validateSignup("x", "a");
     expect(result.valid).toBe(false);
-    expect(result.emailError).toBe("emailDomain");
+    expect(result.emailError).toBe("emailInvalid");
     expect(result.passwordError).toBe("passwordLength");
   });
 
-  it("returns valid for allowed email and strong password", () => {
-    const result = validateSignup("student@student.isd.sn", "SecureP@1");
+  it("returns valid for any valid email format and strong password", () => {
+    expect(validateSignup("user@gmail.com", "SecureP@1").valid).toBe(true);
+    expect(validateSignup("student@student.isd.sn", "SecureP@1").valid).toBe(true);
+    const result = validateSignup("anyone@example.org", "MyP@ss1");
     expect(result.valid).toBe(true);
     expect(result.emailError).toBeUndefined();
     expect(result.passwordError).toBeUndefined();
