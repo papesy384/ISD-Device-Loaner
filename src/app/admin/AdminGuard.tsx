@@ -28,11 +28,11 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
         let { data: p } = await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle();
         if (!mounted) return;
         if (!p && user.email) {
-          await supabase.from("profiles").insert({
-            id: user.id,
-            email: user.email,
-            role: (user.email.endsWith("@faculty.isd.sn") ? "admin" : "student") as ProfileRole,
-          });
+          const adminEmails = (typeof process.env.NEXT_PUBLIC_ADMIN_EMAILS === "string"
+            ? process.env.NEXT_PUBLIC_ADMIN_EMAILS.split(",").map((e) => e.trim().toLowerCase()).filter(Boolean)
+            : []) as string[];
+          const role: ProfileRole = adminEmails.includes(user.email.toLowerCase()) ? "admin" : "student";
+          await supabase.from("profiles").insert({ id: user.id, email: user.email, role });
           const { data: created } = await supabase.from("profiles").select("role").eq("id", user.id).single();
           p = created as Pick<Profile, "role"> | null;
         }

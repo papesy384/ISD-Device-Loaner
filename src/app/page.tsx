@@ -13,6 +13,9 @@ export default async function Home() {
           <p className="mt-4 text-base leading-relaxed opacity-90" style={{ color: "#002d56" }}>
             {t("tagline")}
           </p>
+          <p className="mt-2 text-sm leading-relaxed opacity-80" style={{ color: "#002d56" }}>
+            {t("rolesHint")}
+          </p>
         </header>
 
         <HomeActions />

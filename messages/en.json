@@ -1,6 +1,7 @@
 {
   "home": {
     "tagline": "Borrow and return school devices. Sign up or sign in to get started.",
+    "rolesHint": "Students: borrow devices. Admins: use any email; add it to NEXT_PUBLIC_ADMIN_EMAILS in .env.local or set role in Supabase to access the admin dashboard.",
     "signedInAs": "Signed in as {email}",
     "signOut": "Sign out"
   },

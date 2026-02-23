@@ -28,19 +28,24 @@ export default function HomeActions() {
           setLoading(false);
           return;
         }
-        const { data: existingProfile } = await supabase.from("profiles").select("*").eq("id", u.id).maybeSingle();
+        const adminEmails = (typeof process.env.NEXT_PUBLIC_ADMIN_EMAILS === "string"
+          ? process.env.NEXT_PUBLIC_ADMIN_EMAILS.split(",").map((e) => e.trim().toLowerCase()).filter(Boolean)
+          : []) as string[];
+        const isAdminEmail = u.email ? adminEmails.includes(u.email.toLowerCase()) : false;
+
+        let { data: existingProfile } = await supabase.from("profiles").select("*").eq("id", u.id).maybeSingle();
         if (!mounted) return;
         if (!existingProfile && u.email) {
-          await supabase.from("profiles").insert({
-            id: u.id,
-            email: u.email,
-            role: (u.email.endsWith("@faculty.isd.sn") ? "admin" : "student") as ProfileRole,
-          });
+          const role: ProfileRole = isAdminEmail ? "admin" : "student";
+          await supabase.from("profiles").insert({ id: u.id, email: u.email, role });
           const { data: created } = await supabase.from("profiles").select("*").eq("id", u.id).single();
-          if (mounted) setProfile(created ?? null);
-        } else {
-          setProfile((existingProfile as Profile) ?? null);
+          existingProfile = created;
+        } else if (existingProfile && existingProfile.role === "student" && isAdminEmail) {
+          await supabase.from("profiles").update({ role: "admin" }).eq("id", u.id);
+          const { data: updated } = await supabase.from("profiles").select("*").eq("id", u.id).single();
+          existingProfile = updated;
         }
+        if (mounted) setProfile((existingProfile as Profile) ?? null);
       } catch {
         if (mounted) setUser(null);
         setProfile(null);
@@ -55,9 +60,13 @@ export default function HomeActions() {
     try {
       const supabase = createClient();
       await supabase.auth.signOut();
+      setUser(null);
+      setProfile(null);
       router.push("/");
       router.refresh();
     } catch {
+      setUser(null);
+      setProfile(null);
       router.refresh();
     }
   }

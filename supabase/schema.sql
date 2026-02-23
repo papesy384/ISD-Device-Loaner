@@ -68,16 +68,14 @@ drop trigger if exists on_loan_returned on public.loans;
 create trigger on_loan_returned after update on public.loans
   for each row execute function public.set_device_returned();
 
--- Create profile on signup
+-- Create profile on signup. Everyone gets role 'student'. To make someone admin:
+-- Option A: In Supabase Table Editor → profiles → set role = 'admin' for that user.
+-- Option B: In .env.local set NEXT_PUBLIC_ADMIN_EMAILS=admin@example.com,other@example.com (comma-separated); those users get admin on next load.
 create or replace function public.handle_new_user()
 returns trigger as $$
 begin
   insert into public.profiles (id, email, role)
-  values (
-    new.id,
-    new.email,
-    case when split_part(new.email, '@', 2) = 'faculty.isd.sn' then 'admin' else 'student' end
-  )
+  values (new.id, new.email, 'student')
   on conflict (id) do update set email = excluded.email, updated_at = now();
   return new;
 end;

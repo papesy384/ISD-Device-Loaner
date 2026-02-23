@@ -1,6 +1,7 @@
 {
   "home": {
     "tagline": "Empruntez et rendez les appareils. Inscrivez-vous ou connectez-vous pour commencer.",
+    "rolesHint": "Élèves : empruntez des appareils. Admins : utilisez n'importe quelle adresse ; ajoutez-la à NEXT_PUBLIC_ADMIN_EMAILS dans .env.local ou définissez le rôle dans Supabase pour accéder à l'administration.",
     "signedInAs": "Connecté en tant que {email}",
     "signOut": "Se déconnecter"
   },
