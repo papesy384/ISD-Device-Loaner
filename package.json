@@ -1,9 +1,9 @@
 {
-  "name": "isd-device-loaner",
+  "name": "isd_device_loaner",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname localhost",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
