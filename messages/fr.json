@@ -1,0 +1,42 @@
+{
+  "admin": {
+    "addDevice": {
+      "title": "Ajouter un appareil",
+      "name": "Nom de l'appareil",
+      "namePlaceholder": "ex. iPad Pro 12.9",
+      "serialNumber": "Numéro de série",
+      "serialNumberPlaceholder": "Scanner ou saisir le numéro de série",
+      "scanBarcode": "Scanner le code-barres",
+      "stopScan": "Arrêter le scan",
+      "status": "Statut",
+      "statusAvailable": "Disponible",
+      "statusLoaned": "Prêté",
+      "statusRepair": "En réparation",
+      "condition": "État",
+      "conditionNew": "Neuf",
+      "conditionGood": "Bon",
+      "conditionFair": "Correct",
+      "conditionPoor": "Mauvais",
+      "submit": "Ajouter l'appareil",
+      "backToAdmin": "Retour à l'administration"
+    }
+  },
+  "signup": {
+    "title": "Créer votre compte",
+    "subtitle": "Inscrivez-vous avec votre e-mail ISD pour emprunter des appareils.",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@student.isd.sn ou vous@faculty.isd.sn",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Min 6 caractères, 1 majuscule, 1 caractère spécial",
+    "submit": "S'inscrire",
+    "backToHome": "Retour à l'accueil",
+    "logoAlt": "Logo ISD",
+    "errors": {
+      "emailDomain": "L'e-mail doit se terminer par @student.isd.sn ou @faculty.isd.sn",
+      "passwordLength": "Le mot de passe doit contenir au moins 6 caractères",
+      "passwordUppercase": "Le mot de passe doit contenir au moins une majuscule",
+      "passwordSpecial": "Le mot de passe doit contenir au moins un caractère spécial",
+      "generic": "Veuillez corriger les erreurs ci-dessus."
+    }
+  }
+}

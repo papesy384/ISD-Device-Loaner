@@ -1,0 +1,42 @@
+{
+  "admin": {
+    "addDevice": {
+      "title": "Add Device",
+      "name": "Device Name",
+      "namePlaceholder": "e.g. iPad Pro 12.9",
+      "serialNumber": "Serial Number",
+      "serialNumberPlaceholder": "Scan or enter serial number",
+      "scanBarcode": "Scan Barcode",
+      "stopScan": "Stop Scan",
+      "status": "Status",
+      "statusAvailable": "Available",
+      "statusLoaned": "Loaned",
+      "statusRepair": "Repair",
+      "condition": "Condition",
+      "conditionNew": "New",
+      "conditionGood": "Good",
+      "conditionFair": "Fair",
+      "conditionPoor": "Poor",
+      "submit": "Add Device",
+      "backToAdmin": "Back to Admin"
+    }
+  },
+  "signup": {
+    "title": "Create your account",
+    "subtitle": "Sign up with your ISD email to borrow devices.",
+    "email": "Email",
+    "emailPlaceholder": "you@student.isd.sn or you@faculty.isd.sn",
+    "password": "Password",
+    "passwordPlaceholder": "Min 6 characters, 1 uppercase, 1 special",
+    "submit": "Sign up",
+    "backToHome": "Back to home",
+    "logoAlt": "ISD Logo",
+    "errors": {
+      "emailDomain": "Email must end with @student.isd.sn or @faculty.isd.sn",
+      "passwordLength": "Password must be at least 6 characters",
+      "passwordUppercase": "Password must contain at least one uppercase letter",
+      "passwordSpecial": "Password must contain at least one special character",
+      "generic": "Please fix the errors above."
+    }
+  }
+}
