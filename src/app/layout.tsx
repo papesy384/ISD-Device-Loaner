@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "ISD Device Loaner",
@@ -24,13 +13,30 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const messages = await getMessages();
+  let locale = "en";
+  let messages: Record<string, unknown> = {};
+  try {
+    [locale, messages] = await Promise.all([
+      getLocale(),
+      getMessages().then((m) => m as Record<string, unknown>),
+    ]);
+  } catch {
+    try {
+      messages = (await import("../../messages/en.json")).default;
+    } catch {
+      // no-op
+    }
+  }
 
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased"
+        style={{
+          background: "#f4f4f5",
+          color: "#18181b",
+          fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif",
+        }}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
