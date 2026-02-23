@@ -1,5 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
+/**
+ * Use this config when the dev server is already running (e.g. npm run dev in another terminal).
+ * Run: npx playwright test --config=playwright.no-server.config.ts
+ */
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: true,
@@ -11,13 +15,7 @@ export default defineConfig({
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
   },
-  // Use Chromium only to avoid Firefox/WebKit crashes (e.g. SIGABRT in HIServices when launched by Playwright).
-  // Add Firefox/WebKit back for full matrix: { name: "firefox", ... }, { name: "webkit", ... }
+  // Chromium only to avoid Firefox/WebKit crashes in some environments.
   projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
-  webServer: {
-    command: "npm run dev",
-    url: "http://localhost:3000",
-    reuseExistingServer: true,
-    timeout: 60_000,
-  },
+  // No webServer - assume app is already running at baseURL
 });

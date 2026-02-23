@@ -29,6 +29,8 @@
     "password": "Mot de passe",
     "passwordPlaceholder": "Min 6 caractères, 1 majuscule, 1 caractère spécial",
     "submit": "S'inscrire",
+    "submitting": "Inscription en cours…",
+    "success": "Consultez votre e-mail pour confirmer votre compte.",
     "backToHome": "Retour à l'accueil",
     "logoAlt": "Logo ISD",
     "errors": {
@@ -36,6 +38,8 @@
       "passwordLength": "Le mot de passe doit contenir au moins 6 caractères",
       "passwordUppercase": "Le mot de passe doit contenir au moins une majuscule",
       "passwordSpecial": "Le mot de passe doit contenir au moins un caractère spécial",
+      "authError": "Échec de l'inscription. Réessayez ou utilisez un autre e-mail.",
+      "configError": "L'inscription n'est pas configurée. Veuillez contacter le support.",
       "generic": "Veuillez corriger les erreurs ci-dessus."
     }
   }

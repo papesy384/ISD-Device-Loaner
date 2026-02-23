@@ -29,6 +29,8 @@
     "password": "Password",
     "passwordPlaceholder": "Min 6 characters, 1 uppercase, 1 special",
     "submit": "Sign up",
+    "submitting": "Signing up…",
+    "success": "Check your email to confirm your account.",
     "backToHome": "Back to home",
     "logoAlt": "ISD Logo",
     "errors": {
@@ -36,6 +38,8 @@
       "passwordLength": "Password must be at least 6 characters",
       "passwordUppercase": "Password must contain at least one uppercase letter",
       "passwordSpecial": "Password must contain at least one special character",
+      "authError": "Sign-up failed. Please try again or use a different email.",
+      "configError": "Sign-up is not configured. Please contact support.",
       "generic": "Please fix the errors above."
     }
   }
