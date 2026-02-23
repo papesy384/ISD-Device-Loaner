@@ -1,4 +1,9 @@
 {
+  "home": {
+    "tagline": "Borrow and return school devices. Sign up or sign in to get started.",
+    "signedInAs": "Signed in as {email}",
+    "signOut": "Sign out"
+  },
   "admin": {
     "addDevice": {
       "title": "Add Device",
@@ -19,7 +24,38 @@
       "conditionPoor": "Poor",
       "submit": "Add Device",
       "backToAdmin": "Back to Admin"
+    },
+    "dashboard": {
+      "title": "Admin",
+      "devicesTitle": "Devices",
+      "loansTitle": "Loans",
+      "overdue": "Overdue",
+      "addDevice": "Add Device",
+      "backToHome": "Back to home",
+      "noDevices": "No devices yet.",
+      "noLoans": "No loans.",
+      "due": "Due",
+      "returned": "Returned"
     }
+  },
+  "borrow": {
+    "title": "Borrow a device",
+    "available": "Available devices",
+    "borrow": "Borrow",
+    "noDevices": "No devices available.",
+    "success": "Device borrowed.",
+    "myLoans": "My loans",
+    "currentLoans": "Your current loans",
+    "return": "Return",
+    "due": "Due",
+    "overdue": "Overdue",
+    "noLoans": "You have no active loans.",
+    "returnSuccess": "Device returned."
+  },
+  "common": {
+    "locale": "Language",
+    "en": "English",
+    "fr": "French"
   },
   "signup": {
     "title": "Create your account",

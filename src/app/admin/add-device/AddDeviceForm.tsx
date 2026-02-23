@@ -3,30 +3,63 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BarcodeScanner } from "@/src/components/BarcodeScanner";
-
-type Status = "available" | "loaned" | "repair";
-type Condition = "new" | "good" | "fair" | "poor";
+import { createClient } from "@/src/lib/supabase/client";
+import type { DeviceStatus, DeviceCondition } from "@/src/types/database";
 
 export default function AddDeviceForm() {
   const t = useTranslations("admin.addDevice");
   const [name, setName] = useState("");
   const [serialNumber, setSerialNumber] = useState("");
-  const [status, setStatus] = useState<Status>("available");
-  const [condition, setCondition] = useState<Condition>("good");
+  const [status, setStatus] = useState<DeviceStatus>("available");
+  const [condition, setCondition] = useState<DeviceCondition>("good");
   const [showScanner, setShowScanner] = useState(false);
+  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleScan(value: string) {
     setSerialNumber(value);
     setShowScanner(false);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // TODO: submit to Supabase
+    setMessage(null);
+    setIsSubmitting(true);
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.from("devices").insert({
+        name: name.trim(),
+        serial_number: serialNumber.trim(),
+        status,
+        condition,
+      });
+      if (error) {
+        setMessage({ type: "error", text: error.message });
+        return;
+      }
+      setMessage({ type: "success", text: "Device added." });
+      setName("");
+      setSerialNumber("");
+      setStatus("available");
+      setCondition("good");
+    } catch {
+      setMessage({ type: "error", text: "Something went wrong." });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      {message && (
+        <div
+          role={message.type === "error" ? "alert" : "status"}
+          className={`rounded-lg border-2 px-4 py-3 text-sm font-medium ${message.type === "error" ? "border-[#fdb913] bg-[#fdb913]/20" : "border-[#002d56]/30 bg-[#002d56]/5"}`}
+          style={{ color: "#002d56" }}
+        >
+          {message.text}
+        </div>
+      )}
       <div className="flex flex-col gap-2">
         <label htmlFor="device-name" className="text-sm font-medium text-isd-navy">
           {t("name")}
@@ -82,7 +115,7 @@ export default function AddDeviceForm() {
         <select
           id="status"
           value={status}
-          onChange={(e) => setStatus(e.target.value as Status)}
+          onChange={(e) => setStatus(e.target.value as DeviceStatus)}
           className="rounded-lg border border-isd-navy/30 bg-white px-4 py-3 text-isd-navy focus:border-isd-gold focus:outline-none focus:ring-2 focus:ring-isd-gold/30 dark:border-isd-gold/30 dark:bg-isd-navy/10"
         >
           <option value="available">{t("statusAvailable")}</option>
@@ -98,7 +131,7 @@ export default function AddDeviceForm() {
         <select
           id="condition"
           value={condition}
-          onChange={(e) => setCondition(e.target.value as Condition)}
+          onChange={(e) => setCondition(e.target.value as DeviceCondition)}
           className="rounded-lg border border-isd-navy/30 bg-white px-4 py-3 text-isd-navy focus:border-isd-gold focus:outline-none focus:ring-2 focus:ring-isd-gold/30 dark:border-isd-gold/30 dark:bg-isd-navy/10"
         >
           <option value="new">{t("conditionNew")}</option>
@@ -110,9 +143,10 @@ export default function AddDeviceForm() {
 
       <button
         type="submit"
-        className="rounded-lg bg-isd-navy px-4 py-3 font-medium text-white transition-colors hover:bg-isd-navy/90 focus:outline-none focus:ring-2 focus:ring-isd-gold focus:ring-offset-2"
+        disabled={isSubmitting}
+        className="rounded-lg bg-isd-navy px-4 py-3 font-medium text-white transition-colors hover:bg-isd-navy/90 focus:outline-none focus:ring-2 focus:ring-isd-gold focus:ring-offset-2 disabled:opacity-70"
       >
-        {t("submit")}
+        {isSubmitting ? "…" : t("submit")}
       </button>
     </form>
   );

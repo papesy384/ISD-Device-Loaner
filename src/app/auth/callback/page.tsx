@@ -17,7 +17,6 @@ export default function AuthCallbackPage() {
     const type = searchParams.get("type");
 
     if (!token_hash || !type) {
-      setStatus("error");
       window.location.href = "/";
       return;
     }

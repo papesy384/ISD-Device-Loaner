@@ -1,4 +1,9 @@
 {
+  "home": {
+    "tagline": "Empruntez et rendez les appareils. Inscrivez-vous ou connectez-vous pour commencer.",
+    "signedInAs": "Connecté en tant que {email}",
+    "signOut": "Se déconnecter"
+  },
   "admin": {
     "addDevice": {
       "title": "Ajouter un appareil",
@@ -19,7 +24,38 @@
       "conditionPoor": "Mauvais",
       "submit": "Ajouter l'appareil",
       "backToAdmin": "Retour à l'administration"
+    },
+    "dashboard": {
+      "title": "Admin",
+      "devicesTitle": "Appareils",
+      "loansTitle": "Prêts",
+      "overdue": "En retard",
+      "addDevice": "Ajouter un appareil",
+      "backToHome": "Retour à l'accueil",
+      "noDevices": "Aucun appareil.",
+      "noLoans": "Aucun prêt.",
+      "due": "Retour le",
+      "returned": "Retourné"
     }
+  },
+  "borrow": {
+    "title": "Emprunter un appareil",
+    "available": "Appareils disponibles",
+    "borrow": "Emprunter",
+    "noDevices": "Aucun appareil disponible.",
+    "success": "Appareil emprunté.",
+    "myLoans": "Mes prêts",
+    "currentLoans": "Vos prêts en cours",
+    "return": "Retourner",
+    "due": "Retour le",
+    "overdue": "En retard",
+    "noLoans": "Aucun prêt en cours.",
+    "returnSuccess": "Appareil retourné."
+  },
+  "common": {
+    "locale": "Langue",
+    "en": "Anglais",
+    "fr": "Français"
   },
   "signup": {
     "title": "Créer votre compte",

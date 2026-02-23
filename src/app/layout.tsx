@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import LocaleToggle from "@/src/components/LocaleToggle";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -39,6 +40,9 @@ export default async function RootLayout({
         }}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <div className="fixed right-4 top-4 z-10">
+            <LocaleToggle />
+          </div>
           {children}
         </NextIntlClientProvider>
       </body>
