@@ -29,19 +29,20 @@ export default function SignupForm() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-isd-navy/20 bg-white p-8 shadow-lg dark:border-isd-gold/20 dark:bg-isd-navy/5">
+    <div className="mx-auto w-full max-w-md rounded-2xl border border-[#002d56]/20 bg-white p-8 shadow-lg">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {errorMessage && (
           <div
             role="alert"
-            className="rounded-lg border-2 border-isd-gold bg-isd-gold/20 px-4 py-3 text-sm font-medium text-isd-navy"
+            className="rounded-lg border-2 border-[#fdb913] bg-[#fdb913]/20 px-4 py-3 text-sm font-medium"
+            style={{ color: "#002d56" }}
           >
             {errorMessage}
           </div>
         )}
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-medium text-isd-navy">
+          <label htmlFor="email" className="text-sm font-medium" style={{ color: "#002d56" }}>
             {t("email")}
           </label>
           <input
@@ -50,13 +51,14 @@ export default function SignupForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder={t("emailPlaceholder")}
-            className="rounded-lg border border-isd-navy/30 bg-white px-4 py-3 text-isd-navy placeholder:text-isd-navy/50 focus:border-isd-gold focus:outline-none focus:ring-2 focus:ring-isd-gold/30 dark:border-isd-gold/30 dark:bg-isd-navy/10 dark:placeholder:text-isd-gold/50"
+            className="rounded-lg border border-[#002d56]/40 bg-white px-4 py-3 placeholder:opacity-60 focus:border-[#fdb913] focus:outline-none focus:ring-2 focus:ring-[#fdb913]/40"
+            style={{ color: "#002d56" }}
             autoComplete="email"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="password" className="text-sm font-medium text-isd-navy">
+          <label htmlFor="password" className="text-sm font-medium" style={{ color: "#002d56" }}>
             {t("password")}
           </label>
           <input
@@ -65,14 +67,16 @@ export default function SignupForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={t("passwordPlaceholder")}
-            className="rounded-lg border border-isd-navy/30 bg-white px-4 py-3 text-isd-navy placeholder:text-isd-navy/50 focus:border-isd-gold focus:outline-none focus:ring-2 focus:ring-isd-gold/30 dark:border-isd-gold/30 dark:bg-isd-navy/10 dark:placeholder:text-isd-gold/50"
+            className="rounded-lg border border-[#002d56]/40 bg-white px-4 py-3 placeholder:opacity-60 focus:border-[#fdb913] focus:outline-none focus:ring-2 focus:ring-[#fdb913]/40"
+            style={{ color: "#002d56" }}
             autoComplete="new-password"
           />
         </div>
 
         <button
           type="submit"
-          className="rounded-lg bg-isd-navy px-4 py-3 font-medium text-white transition-colors hover:bg-isd-navy/90 focus:outline-none focus:ring-2 focus:ring-isd-gold focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-isd-navy"
+          className="rounded-lg px-4 py-3 font-medium text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#fdb913] focus:ring-offset-2"
+          style={{ backgroundColor: "#002d56" }}
         >
           {t("submit")}
         </button>

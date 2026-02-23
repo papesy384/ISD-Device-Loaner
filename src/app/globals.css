@@ -27,3 +27,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   min-height: 100vh;
 }
+
+/* ISD brand (isdakar.org): Navy #002d56, Gold #fdb913 */
+.isd-brand-link:hover,
+.signup-page a[href="/"]:hover {
+  color: #fdb913 !important;
+}

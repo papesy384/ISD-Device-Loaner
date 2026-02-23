@@ -1,22 +1,25 @@
 import Link from "next/link";
+import { ISDLogo } from "@/src/components/ISDLogo";
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-isd-navy/5 to-white dark:from-isd-navy dark:to-isd-navy/95">
+    <div className="min-h-screen bg-[#f0f4f8]">
       <div className="mx-auto max-w-lg px-6 py-12">
-        <h1 className="mb-8 text-2xl font-semibold text-isd-navy">Admin</h1>
+        <ISDLogo showSubtitle={true} href="/" className="mb-8 inline-block" />
+        <h1 className="mb-8 text-2xl font-semibold" style={{ color: "#002d56" }}>Admin</h1>
         <ul className="flex flex-col gap-4">
           <li>
             <Link
               href="/admin/add-device"
-              className="block rounded-lg border border-isd-navy/20 bg-white px-6 py-4 font-medium text-isd-navy shadow transition-colors hover:border-isd-gold hover:bg-isd-gold/10 dark:border-isd-gold/20 dark:bg-isd-navy/5"
+              className="block rounded-lg border border-[#002d56]/20 bg-white px-6 py-4 font-medium shadow transition-colors hover:border-[#fdb913] hover:bg-[#fdb913]/10 focus:outline-none focus:ring-2 focus:ring-[#fdb913] focus:ring-offset-2"
+              style={{ color: "#002d56" }}
             >
               Add Device
             </Link>
           </li>
         </ul>
         <p className="mt-8">
-          <Link href="/" className="text-sm text-isd-navy/70 underline hover:text-isd-gold">
+          <Link href="/" className="isd-brand-link text-sm underline rounded focus:outline-none focus:ring-2 focus:ring-[#fdb913] focus:ring-offset-2" style={{ color: "#002d56" }}>
             Back to home
           </Link>
         </p>
