@@ -42,5 +42,20 @@
       "configError": "L'inscription n'est pas configurée. Veuillez contacter le support.",
       "generic": "Veuillez corriger les erreurs ci-dessus."
     }
+  },
+  "signin": {
+    "title": "Connexion",
+    "subtitle": "Connectez-vous avec votre e-mail et mot de passe.",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Votre mot de passe",
+    "submit": "Se connecter",
+    "submitting": "Connexion…",
+    "backToHome": "Retour à l'accueil",
+    "errors": {
+      "authError": "Échec de la connexion. Vérifiez votre e-mail et mot de passe.",
+      "configError": "La connexion n'est pas configurée."
+    }
   }
 }

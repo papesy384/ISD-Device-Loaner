@@ -42,5 +42,20 @@
       "configError": "Sign-up is not configured. Please contact support.",
       "generic": "Please fix the errors above."
     }
+  },
+  "signin": {
+    "title": "Sign in",
+    "subtitle": "Sign in with your email and password.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "backToHome": "Back to home",
+    "errors": {
+      "authError": "Sign-in failed. Check your email and password.",
+      "configError": "Sign-in is not configured."
+    }
   }
 }

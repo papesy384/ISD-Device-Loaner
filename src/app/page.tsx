@@ -23,6 +23,13 @@ export default function Home() {
             Sign up
           </Link>
           <Link
+            href="/auth/signin"
+            className="flex flex-1 items-center justify-center rounded-xl border-2 px-6 py-4 text-center font-semibold transition-all hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-[#fdb913] focus:ring-offset-2 active:scale-[0.98]"
+            style={{ borderColor: "#002d56", color: "#002d56", minHeight: 52 }}
+          >
+            Sign in
+          </Link>
+          <Link
             href="/admin"
             className="flex flex-1 items-center justify-center rounded-xl border-2 px-6 py-4 text-center font-semibold transition-all hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-[#fdb913] focus:ring-offset-2 active:scale-[0.98]"
             style={{ borderColor: "#002d56", color: "#002d56", minHeight: 52 }}
