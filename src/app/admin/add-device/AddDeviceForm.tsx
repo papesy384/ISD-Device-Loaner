@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BarcodeScanner } from "@/src/components/BarcodeScanner";
+import { BarcodeScanFromFile } from "@/src/components/BarcodeScanFromFile";
 import { createClient } from "@/src/lib/supabase/client";
 import type { DeviceStatus, DeviceCondition } from "@/src/types/database";
 
@@ -78,24 +79,30 @@ export default function AddDeviceForm() {
         <label htmlFor="serial-number" className="text-sm font-medium text-isd-navy">
           {t("serialNumber")}
         </label>
-        <div className="flex gap-2">
-          <input
-            id="serial-number"
-            type="text"
-            value={serialNumber}
-            onChange={(e) => setSerialNumber(e.target.value)}
-            placeholder={t("serialNumberPlaceholder")}
-            className="flex-1 rounded-lg border border-isd-navy/30 bg-white px-4 py-3 text-isd-navy placeholder:text-isd-navy/50 focus:border-isd-gold focus:outline-none focus:ring-2 focus:ring-isd-gold/30 dark:border-isd-gold/30 dark:bg-isd-navy/10 dark:placeholder:text-isd-gold/50"
-            aria-describedby={showScanner ? "scanner-region" : undefined}
-          />
-          <button
-            type="button"
-            onClick={() => setShowScanner((s) => !s)}
-            className="rounded-lg bg-isd-gold px-4 py-3 font-medium text-isd-navy transition-colors hover:bg-isd-gold/90 focus:outline-none focus:ring-2 focus:ring-isd-navy focus:ring-offset-2"
-            data-testid="scan-barcode-button"
-          >
-            {showScanner ? t("stopScan") : t("scanBarcode")}
-          </button>
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <input
+              id="serial-number"
+              type="text"
+              value={serialNumber}
+              onChange={(e) => setSerialNumber(e.target.value)}
+              placeholder={t("serialNumberPlaceholder")}
+              className="flex-1 rounded-lg border border-isd-navy/30 bg-white px-4 py-3 text-isd-navy placeholder:text-isd-navy/50 focus:border-isd-gold focus:outline-none focus:ring-2 focus:ring-isd-gold/30 dark:border-isd-gold/30 dark:bg-isd-navy/10 dark:placeholder:text-isd-gold/50"
+              aria-describedby={showScanner ? "scanner-region" : undefined}
+            />
+            <button
+              type="button"
+              onClick={() => setShowScanner((s) => !s)}
+              className="rounded-lg bg-isd-gold px-4 py-3 font-medium text-isd-navy transition-colors hover:bg-isd-gold/90 focus:outline-none focus:ring-2 focus:ring-isd-navy focus:ring-offset-2"
+              data-testid="scan-barcode-button"
+            >
+              {showScanner ? t("stopScan") : t("scanBarcode")}
+            </button>
+          </div>
+          <p className="text-xs opacity-80" style={{ color: "var(--isd-navy, #002d56)" }}>
+            Or use “Upload barcode image” to take a photo or pick an image—works on phone without HTTPS.
+          </p>
+          <BarcodeScanFromFile onScan={handleScan} label={t("scanFromPhoto")} />
         </div>
         {showScanner && (
           <div id="scanner-region" className="mt-2" role="region" aria-label="Camera barcode scanner">

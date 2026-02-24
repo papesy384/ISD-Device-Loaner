@@ -13,6 +13,7 @@
       "serialNumber": "Numéro de série",
       "serialNumberPlaceholder": "Scanner ou saisir le numéro de série",
       "scanBarcode": "Scanner le code-barres",
+      "scanFromPhoto": "Envoyer une image du code-barres",
       "stopScan": "Arrêter le scan",
       "status": "Statut",
       "statusAvailable": "Disponible",

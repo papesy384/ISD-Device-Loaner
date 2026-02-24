@@ -13,6 +13,7 @@
       "serialNumber": "Serial Number",
       "serialNumberPlaceholder": "Scan or enter serial number",
       "scanBarcode": "Scan Barcode",
+      "scanFromPhoto": "Upload barcode image",
       "stopScan": "Stop Scan",
       "status": "Status",
       "statusAvailable": "Available",
