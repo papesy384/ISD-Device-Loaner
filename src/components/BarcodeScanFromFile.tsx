@@ -30,6 +30,7 @@ export function BarcodeScanFromFile({ onScan, label, accept = "image/*" }: Barco
     try {
       const { Html5Qrcode, Html5QrcodeSupportedFormats } = await import("html5-qrcode");
       const scanner = new Html5Qrcode(placeholderId, {
+        verbose: false,
         formatsToSupport: [
           Html5QrcodeSupportedFormats.QR_CODE,
           Html5QrcodeSupportedFormats.CODE_128,

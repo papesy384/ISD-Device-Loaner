@@ -48,6 +48,7 @@ export function BarcodeScanner({ onScan, onClose, "aria-label": ariaLabel }: Bar
         }
         const { Html5Qrcode, Html5QrcodeSupportedFormats } = await import("html5-qrcode");
         const scanner = new Html5Qrcode(elementId, {
+          verbose: false,
           formatsToSupport: [
             Html5QrcodeSupportedFormats.QR_CODE,
             Html5QrcodeSupportedFormats.CODE_128,
