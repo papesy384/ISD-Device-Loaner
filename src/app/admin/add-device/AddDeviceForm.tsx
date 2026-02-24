@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BarcodeScanner } from "@/src/components/BarcodeScanner";
 import { BarcodeScanFromFile } from "@/src/components/BarcodeScanFromFile";
+import { SerialNumberFromImage } from "@/src/components/SerialNumberFromImage";
 import { createClient } from "@/src/lib/supabase/client";
 import type { DeviceStatus, DeviceCondition } from "@/src/types/database";
 
@@ -100,9 +101,17 @@ export default function AddDeviceForm() {
             </button>
           </div>
           <p className="text-xs opacity-80" style={{ color: "var(--isd-navy, #002d56)" }}>
-            Or use “Upload barcode image” to take a photo or pick an image—works on phone without HTTPS.
+            {t("serialNumberHint")}
           </p>
-          <BarcodeScanFromFile onScan={handleScan} label={t("scanFromPhoto")} />
+          <div className="flex flex-wrap gap-2">
+            <BarcodeScanFromFile onScan={handleScan} label={t("scanFromPhoto")} />
+            <SerialNumberFromImage
+              onScan={handleScan}
+              label={t("readSerialFromLabel")}
+              noSerialFound={t("readSerialNoFound")}
+              reading={t("readSerialReading")}
+            />
+          </div>
         </div>
         {showScanner && (
           <div id="scanner-region" className="mt-2" role="region" aria-label="Camera barcode scanner">
